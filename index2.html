@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #666;
+      --accent: #c8ff00;
+      --accent-dim: #9abf00;
+      --mono: 'Space Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    section {
+      padding: 8rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 10rem;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--mono);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.85rem 1.75rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .hero-cta:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+    .hero-scroll {
+      margin-top: 5rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ABOUT */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text h2 {
+      font-family: var(--mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .stack-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .stack-list li {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stack-list li::before {
+      content: '>';
+      color: var(--accent);
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat-item {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+    }
+
+    .stat-number {
+      font-family: var(--mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover { background: #1d1d1d; }
+
+    .project-card:hover .project-arrow { opacity: 1; transform: translate(0,0); }
+
+    .project-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .project-title {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.05em;
+    }
+
+    .project-status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .status-wip {
+      background: rgba(200,255,0,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(200,255,0,0.3);
+    }
+
+    .status-planned {
+      background: rgba(102,102,102,0.12);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .project-arrow {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    /* CONTACT */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-text h2 {
+      font-family: var(--mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .contact-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-line {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.2s;
+    }
+
+    .contact-link:hover .contact-link-line { width: 40px; }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus { border-color: var(--accent); }
+
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+
+    textarea { min-height: 120px; }
+
+    button[type="submit"] {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--bg);
+      background: var(--accent);
+      border: none;
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+
+    button[type="submit"]:hover { background: var(--accent-dim); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      section { padding: 5rem 1.5rem; }
+      #about, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">samuel.dev</a>
+    <ul class="nav-links">
+      <li><a href="#about">über mich</a></li>
+      <li><a href="#projects">projekte</a></li>
+      <li><a href="#contact">kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-tag">Informatiker EFZ · Applikationsentwicklung</p>
+    <h1 class="hero-name">Samuel<br /><span>Bebi.</span></h1>
+    <p class="hero-sub">Angehender Informatiker EFZ mit Fachrichtung Applikationsentwicklung im 2. Lehrjahr — ich baue Projekte die zeigen was ich kann.</p>
+    <a href="#projects" class="hero-cta">Projekte ansehen →</a>
+    <p class="hero-scroll">scroll</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-text">
+      <p class="section-label">01 / über mich</p>
+      <h2>Code als<br />Handwerk.</h2>
+      <p>Ich bin im 2. Lehrjahr meiner Ausbildung zum Informatiker EFZ mit Schwerpunkt Applikationsentwicklung. Mein Fokus liegt auf Full-Stack-Projekten die ich von Anfang bis Ende selbst baue.</p>
+      <p>Neben dem Schulstoff arbeite ich an eigenen Projekten um relevante Technologien gezielt zu lernen — darunter KI-Integration mit der Claude API.</p>
+      <ul class="stack-list">
+        <li>HTML / CSS / JS</li>
+        <li>Node.js</li>
+        <li>Git / GitHub</li>
+        <li>SQL</li>
+        <li>Python</li>
+        <li>Claude API</li>
+      </ul>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-number">2.</div>
+        <div class="stat-label">Lehrjahr</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">geplante Portfolio-Projekte</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">CH</div>
+        <div class="stat-label">Schweiz</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">02 / projekte</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <div class="project-number">001</div>
+        <span class="project-status status-wip">in arbeit</span>
+        <div class="project-title">Portfolio Website</div>
+        <p class="project-desc">Diese Website. Statisches HTML/CSS/JS, live deployed. Zeigt meinen Werdegang und alle anderen Projekte.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">GitHub</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <div class="project-number">002</div>
+        <span class="project-status status-planned">geplant</span>
+        <div class="project-title">REST API</div>
+        <p class="project-desc">Backend-API mit Node.js und Express. Kontaktformular, Routing, Environment Variables.</p>
+        <div class="project-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">REST</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <div class="project-number">003</div>
+        <span class="project-status status-planned">geplant</span>
+        <div class="project-title">KI Chat-App</div>
+        <p class="project-desc">Web-App mit Claude API Integration. Eigenes System-Prompt, eigene UI, API-Key sicher im Backend.</p>
+        <div class="project-tags">
+          <span class="tag">Claude API</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Full Stack</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <div class="project-number">004</div>
+        <span class="project-status status-planned">geplant</span>
+        <div class="project-title">Datenbank-Projekt</div>
+        <p class="project-desc">Persistente Datenspeicherung. Chat-Verlauf, User-Sessions, PostgreSQL.</p>
+        <div class="project-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Prisma</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <p class="section-label">03 / kontakt</p>
+        <h2>Lass uns<br />reden.</h2>
+        <p>Für Fragen, Zusammenarbeit oder Bewerbungsgespräche.</p>
+        <div class="contact-links">
+          <a href="https://github.com/dev-bebi" class="contact-link" target="_blank">
+            <span class="contact-link-line"></span>
+            github.com/dev-bebi
+          </a>
+          <a href="mailto:developer-sam@outlook.com" class="contact-link">
+            <span class="contact-link-line"></span>
+            developer-sam@outlook.com
+          </a>
+        </div>
+      </div>
+      <form>
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="E-Mail" required />
+        <textarea placeholder="Nachricht"></textarea>
+        <button type="submit">Senden →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Samuel Bebi</p>
+    <p>Gebaut mit HTML / CSS / JS</p>
+    <p ><a href="#hero">An den Start</a></p>
+  </footer>
+
+</body>
+</html>
