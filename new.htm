@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#">
+        <tr>
+            <td>Anrede:
+            </td>
+            <td><select name="anrede" required>
+                    <option value="herr">Herr</option>
+                    <option value="frau">Frau</option>
+                </select></td>
+        </tr><br>
+        <tr>
+            <td>Hobby:</td>
+            <td><input type="checkbox" name="hobby" value="schlafen">schlafen
+                <input type="checkbox" name="hobby" value="trinken">trinken
+                <input type="checkbox" name="hobby" value="fahren">fahren
+            </td>
+        </tr><br>
+        <tr>
+            <td>Lieblingsfarbe:</td>
+            <td><input type="radio" name="farbe" value="rot">rot
+                <input type="radio" name="farbe" value="grün">grün
+                <input type="radio" name="farbe" value="blau">blau
+            </td>
+        </tr><br>
+        <tr>
+            <td>Message:</td>
+            <td><textarea name="message" id="" cols="25" rows="1" placeholder="Ihre Nachricht..."></textarea><br>
+            <td>Benutzername <input required type="text"></td><br>
+            <td>Passwort <input required type="password"></td><br>
+            <input type="submit">
+            </td>
+        </tr>
+    </form>
+</body>
+
+</html>

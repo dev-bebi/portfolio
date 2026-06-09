@@ -445,7 +445,9 @@
 </head>
 <body>
 
+
   <nav>
+    <h1 id="title">Hallo Samuel</h1>
     <a href="#hero" class="nav-logo">samuel.dev</a>
     <ul class="nav-links">
       <li><a href="#about">über mich</a></li>
@@ -574,10 +576,10 @@
           </a>
         </div>
       </div>
-      <form>
-        <input type="text" placeholder="Name" required />
-        <input type="email" placeholder="E-Mail" required />
-        <textarea placeholder="Nachricht"></textarea>
+      <form id="kontakt">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="E-Mail" required />
+        <textarea id="message" placeholder="Nachricht"></textarea>
         <button type="submit">Senden →</button>
       </form>
     </div>
@@ -588,6 +590,16 @@
     <p>Gebaut mit HTML / CSS / JS</p>
     <p ><a href="#hero">An den Start</a></p>
   </footer>
-
+<script>
+document.getElementById("kontakt").addEventListener("submit", function(event) {
+  event.preventDefault();
+  
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let nachricht = document.getElementById("message").value;
+  
+  console.log(name, email, nachricht);
+});
+</script>
 </body>
 </html>
